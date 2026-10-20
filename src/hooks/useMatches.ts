@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetchMatches, type MatchesLoader } from '../api/matchesApi';
+import { getLoadErrorMessage } from '../api/getLoadErrorMessage';
 import type { MatchesResponse } from '../domain/matches';
 
 type MatchesState = {
@@ -52,9 +53,7 @@ export function useMatches(load: MatchesLoader = fetchMatches) {
         if (controller.signal.aborted && !timedOut) return;
         const message = timedOut
           ? 'Сервер долго не отвечает. Попробуйте еще раз.'
-          : error instanceof Error && error.message
-            ? error.message
-            : 'Проверьте подключение к интернету и попробуйте еще раз.';
+          : getLoadErrorMessage(error);
         // При ошибке обновления сохраняем данные и время последнего успеха.
         setState((previous) => ({ ...previous, error: message }));
       })

@@ -5,9 +5,32 @@ import { filterMatches, getStatusLabel } from '../src/domain/matches.ts';
 import { formatMatchDate } from '../src/domain/formatMatchDate.ts';
 import { elapsedSeconds } from '../src/domain/elapsedSeconds.ts';
 import { parseMatchesResponse } from '../src/domain/parseMatchesResponse.ts';
+import { getLoadErrorMessage } from '../src/api/getLoadErrorMessage.ts';
 
 const fixture = JSON.parse(readFileSync(new URL('../data/matches.json', import.meta.url), 'utf8'));
 const { matches } = fixture;
+
+test('сетевая ошибка fetch объясняется по-русски', () => {
+  assert.equal(
+    getLoadErrorMessage(new TypeError('Failed to fetch')),
+    'Проверьте подключение к интернету и попробуйте еще раз.',
+  );
+});
+
+test('некорректный JSON дает понятное сообщение', () => {
+  assert.equal(
+    getLoadErrorMessage(new SyntaxError('Unexpected token')),
+    'Сервер вернул некорректный JSON. Попробуйте еще раз.',
+  );
+});
+
+test('сообщение HTTP сохраняется, неизвестная ошибка получает запасной текст', () => {
+  assert.equal(getLoadErrorMessage(new Error('HTTP 503')), 'HTTP 503');
+  assert.equal(
+    getLoadErrorMessage(null),
+    'Проверьте подключение к интернету и попробуйте еще раз.',
+  );
+});
 
 test('«Все» сохраняет все 8 матчей, включая live и postponed', () => {
   assert.equal(filterMatches(matches, 'all').length, 8);
