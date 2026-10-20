@@ -26,10 +26,15 @@ export function filterMatches(matches: Match[], filter: MatchFilter): Match[] {
 
 export function getStatusLabel(match: Match): string {
   switch (match.status) {
-    case 'finished': return 'Завершен';
-    case 'scheduled': return 'Предстоящий';
-    case 'postponed': return 'Перенесен';
-    case 'live': return match.minute === undefined ? 'Идет матч' : `Идет матч · ${match.minute} мин`;
-    default: return 'Статус уточняется';
+    case 'finished':
+      return 'Завершен';
+    case 'scheduled':
+      return 'Предстоящий';
+    case 'postponed':
+      return 'Перенесен';
+    case 'live':
+      return match.minute === undefined ? 'Идет матч' : `Идет матч · ${match.minute} мин`;
+    default:
+      return 'Статус уточняется';
   }
 }

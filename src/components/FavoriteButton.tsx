@@ -24,7 +24,13 @@ export function FavoriteButton({ active, onPress, matchLabel }: Props) {
 }
 
 const styles = StyleSheet.create({
-  button: { minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 8 },
+  button: {
+    minWidth: 48,
+    minHeight: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+  },
   pressed: { backgroundColor: colors.accentSoft },
   star: {
     fontSize: 22,

@@ -4,6 +4,10 @@ export function formatMatchDate(startsAt: string | null): string {
   const date = new Date(startsAt);
   if (!Number.isFinite(date.getTime())) return 'Дата уточняется';
   return new Intl.DateTimeFormat('ru-RU', {
-    day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   }).format(date);
 }

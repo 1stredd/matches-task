@@ -7,9 +7,11 @@ export function useFavorites() {
   const isFavorite = (id: string) => favorites.includes(id);
 
   const toggle = useCallback((id: string) => {
-    setFavorites((previous) => previous.includes(id)
-      ? previous.filter((favoriteId) => favoriteId !== id)
-      : [...previous, id]);
+    setFavorites((previous) =>
+      previous.includes(id)
+        ? previous.filter((favoriteId) => favoriteId !== id)
+        : [...previous, id],
+    );
   }, []);
 
   return { favorites, isFavorite, toggle };
