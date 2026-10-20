@@ -8,7 +8,7 @@
 
 ## Запуск
 
-Нужен Node.js 20+.
+Нужен Node.js 22.13+ (требование Expo SDK 57; Node.js 24 подходит).
 
 ```bash
 npm install

@@ -45,16 +45,17 @@ git log --date=local --format="%h %ad %s"
 git clone matches-task-history.bundle matches-restored
 ```
 
-## Публикация для сдачи
+## Публичный репозиторий
 
-Публичная копия на аккаунте кандидата пока не создана: в доступном подключении нет операции создания репозитория. Исходный репозиторий работодателя не изменялся.
+Решение опубликовано: https://github.com/1stredd/matches-task
 
-Создайте на GitHub пустой публичный репозиторий без README. В папке проекта выполните команды ниже, заменив `YOUR_LOGIN` своим логином:
+Семь коммитов разработки перенесены без изменения дат и хешей. Для получения проекта с GitHub:
 
 ```bash
-git remote rename origin upstream
-git remote add origin https://github.com/YOUR_LOGIN/matches-task.git
-git push -u origin main
+git clone https://github.com/1stredd/matches-task.git
+cd matches-task
+npm install
+npm run web
 ```
 
-После push все коммиты и их даты будут видны на GitHub. Для сдачи отправляется ссылка на новый репозиторий; объяснения находятся в `SOLUTION.md`.
+Для сдачи отправляется ссылка на репозиторий. Объяснения находятся в `SOLUTION.md`, результаты повторной проверки — в `VERIFICATION.md`.
