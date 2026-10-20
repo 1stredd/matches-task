@@ -26,7 +26,8 @@ export function MatchCard({ match, favorite, onToggleFavorite }: Props) {
     <View style={[styles.card, live && styles.liveCard]} testID={`match-${match.id}`}>
       <View style={styles.top}>
         <Text style={styles.date}>{formatMatchDate(match.startsAt)}</Text>
-        <FavoriteButton active={favorite} onPress={onToggleFavorite} />
+        <FavoriteButton active={favorite} onPress={onToggleFavorite}
+          matchLabel={`${match.home.name} — ${match.away.name}`} />
       </View>
       <View style={styles.teams}>
         <TeamRow team={match.home} score={match.score?.home} />

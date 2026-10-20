@@ -1,18 +1,22 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
+import { colors } from '../theme';
 
 type Props = {
   active: boolean;
   onPress: () => void;
+  matchLabel: string;
 };
 
 // Звёздочка «в избранное».
-export function FavoriteButton({ active, onPress }: Props) {
+export function FavoriteButton({ active, onPress, matchLabel }: Props) {
   return (
     <Pressable
       onPress={onPress}
-      hitSlop={12}
+      hitSlop={4}
       accessibilityRole="button"
-      accessibilityLabel={active ? 'Убрать из избранного' : 'Добавить в избранное'}
+      accessibilityState={{ selected: active }}
+      accessibilityLabel={`${active ? 'Убрать матч' : 'Добавить матч'} ${matchLabel} ${active ? 'из избранного' : 'в избранное'}`}
+      style={({ pressed }) => [styles.button, pressed && styles.pressed]}
     >
       <Text style={[styles.star, active && styles.active]}>{active ? '★' : '☆'}</Text>
     </Pressable>
@@ -20,11 +24,13 @@ export function FavoriteButton({ active, onPress }: Props) {
 }
 
 const styles = StyleSheet.create({
+  button: { minWidth: 48, minHeight: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 8 },
+  pressed: { backgroundColor: colors.accentSoft },
   star: {
     fontSize: 22,
-    color: '#9ca3af',
+    color: colors.muted,
   },
   active: {
-    color: '#ef3124',
+    color: colors.accent,
   },
 });
